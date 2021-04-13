@@ -1,0 +1,16 @@
+[{
+  "_id": {
+    "$oid": "60264dea7bdf922a180ddd2c"
+  },
+  "naziv": "Sport"
+},{
+  "_id": {
+    "$oid": "6026b5f7c15de93b28a41b21"
+  },
+  "naziv": "Kultura"
+},{
+  "_id": {
+    "$oid": "6026b603c15de93b28a41b22"
+  },
+  "naziv": "Random"
+}]

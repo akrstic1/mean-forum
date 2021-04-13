@@ -1,0 +1,50 @@
+[{
+  "_id": {
+    "$oid": "6029763e064bdf1354aff242"
+  },
+  "text": "balbalbbalbalbalblalbalbalblalbalbalbalblabalbalbalbalbalbalbalbalbbalbalbalblalbalbalblalbalbalbalblabalbalbalbalbalbalblablalbalblalbaalalblablalbalblalbaalal",
+  "user_id": "60293cb2064bdf1354aff23f",
+  "category_id": "60264dea7bdf922a180ddd2c",
+  "category_name": "Sport",
+  "theme": "derby",
+  "replies": [
+    {
+      "reply_text": "moj 2. odgovor",
+      "reply_user_id": "60264b497bdf922a180ddd29",
+      "reply_date": {
+        "$date": "2021-02-14T17:49:25Z"
+      }
+    }
+  ],
+  "date": {
+    "$date": "2021-02-14T17:48:25Z"
+  }
+},{
+  "_id": {
+    "$oid": "602976fe064bdf1354aff243"
+  },
+  "text": "sport i tako to",
+  "user_id": "60264b497bdf922a180ddd29",
+  "category_id": "60264dea7bdf922a180ddd2c",
+  "category_name": "Sport",
+  "theme": "NBA playoffs",
+  "replies": [
+    {
+      "reply_text": "moj odgovor",
+      "reply_user_id": "60293cb2064bdf1354aff23f",
+      "reply_date": {
+        "$date": "2021-02-10T17:49:26Z"
+      }
+    },
+    {
+      "reply_text": "moj odgovor tebi",
+      "reply_user_id": "60264b497bdf922a180ddd29",
+      "reply_date": {
+        "$date": "2021-02-10T17:50:24Z"
+      }
+    }
+  ],
+  "date": {
+    "$date": "2021-02-10T17:46:26Z"
+  }
+}]
