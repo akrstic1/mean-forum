@@ -5,13 +5,10 @@ import { MainRoutingModule } from './main-routing.module';
 import { PostsComponent } from './posts/posts.component';
 import { RepliesComponent } from './replies/replies.component';
 import { MatchUserPipe } from '../shared/pipes/match-user.pipe';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [PostsComponent, RepliesComponent, MatchUserPipe],
-  imports: [
-    CommonModule,
-    MainRoutingModule
-  ]
+  declarations: [PostsComponent, RepliesComponent],
+  imports: [CommonModule, MainRoutingModule, SharedModule],
 })
-export class MainModule { }
+export class MainModule {}

@@ -4,12 +4,9 @@ import { CommonModule } from '@angular/common';
 import { SharedRoutingModule } from './shared-routing.module';
 import { MatchUserPipe } from './pipes/match-user.pipe';
 
-
 @NgModule({
   declarations: [MatchUserPipe],
-  imports: [
-    CommonModule,
-    SharedRoutingModule
-  ]
+  imports: [CommonModule, SharedRoutingModule],
+  exports: [MatchUserPipe],
 })
-export class SharedModule { }
+export class SharedModule {}
