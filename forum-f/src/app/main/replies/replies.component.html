@@ -15,22 +15,22 @@
     <!--LISTA KATEGORIJA  -->
     <div>
         <div class="main_post">
-            <div *ngFor="let main_post of post; let i = index" class="post">
+            <div  class="post">
                 <div class="reply_content">
                     <div class="reply_user">
-                        <a href = "#">{{main_post.user_id | matchUser : users}}</a>
+                        <a href = "#">{{post.user_id | matchUser : users}}</a>
                     </div>
-                    
+
                     <div>
                         Datum i vrijeme objave: <br>
-                        {{main_post.date | date:'dd.MM.yyyy HH:mm'}}
+                        {{post.date | date:'dd.MM.yyyy HH:mm'}}
                     </div>
                 </div>
-    
+
                 <div class="reply">
-                    <p>{{main_post.text}}</p>
+                    <p>{{post.text}}</p>
                 </div>
-                
+
             </div>
         </div>
         <div *ngFor="let reply of replies; let i = index" class="post">
@@ -38,7 +38,7 @@
                 <div class="reply_user">
                     <a href = "#">{{reply.reply_user_id | matchUser : users}}</a>
                 </div>
-                
+
                 <div>
                     Datum i vrijeme objave: <br>
                     {{reply.reply_date | date:'dd.MM.yyyy HH:mm'}}
@@ -48,7 +48,7 @@
             <div class="reply">
                 <p>{{reply.reply_text}}</p>
             </div>
-            
+
         </div>
 <!--
         <div class="row justify-content-between align-middle">
