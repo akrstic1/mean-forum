@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { DataService } from '../data.service';
-import { User } from './user.model';
+import { DataService } from '../../services/data.service';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class SharedService {
   users : User[] = [];
   usersSubject : BehaviorSubject<User[]> = new BehaviorSubject([]);
 
-  constructor(private dataService : DataService) { 
+  constructor(private dataService : DataService) {
     this.init();
   }
 

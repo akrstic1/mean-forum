@@ -2,36 +2,36 @@ import { HttpClient } from '@angular/common/http';
 import { sharedStylesheetJitUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { DataService } from 'src/app/data.service';
-import { Category } from 'src/app/shared/category.model';
-import { SharedService } from 'src/app/shared/shared.service';
+import { DataService } from 'src/app/services/data.service';
+import { Category } from 'src/app/shared/models/category.model';
+import { SharedService } from 'src/app/shared/services/shared.service';
 import { HomeService } from '../home.service';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent implements OnInit {
+  categorySubject: BehaviorSubject<Category[]> = new BehaviorSubject(null);
+  categories: Category[] = null;
+  categorySubscription: Subscription = null;
 
-  categorySubject : BehaviorSubject<Category[]> = new BehaviorSubject(null);
-  categories : Category[] = null;
-  categorySubscription : Subscription = null;
-
-  constructor(private http:HttpClient, private homeService:HomeService, private sharedService : SharedService) {
-
-  }
+  constructor(
+    private http: HttpClient,
+    private homeService: HomeService,
+    private sharedService: SharedService
+  ) {}
 
   ngOnInit(): void {
     //Dohvaća subject iz homeservica
     this.categorySubject = this.homeService.getCategories();
 
     //Radi subscription na observable, dohvaća array u komponentu
-    this.categorySubscription = this.categorySubject
-      .subscribe( res => {
-        this.categories = res;
-        console.log("comp", this.categories)
-      });
+    this.categorySubscription = this.categorySubject.subscribe((res) => {
+      this.categories = res;
+      console.log('comp', this.categories);
+    });
   }
 
   /*
@@ -39,5 +39,4 @@ export class HomepageComponent implements OnInit {
   posaljiId(id){
     this.sharedService.id = id;
   */
-
 }

@@ -2,9 +2,9 @@ import { formatDate } from '@angular/common';
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { SharedService } from 'src/app/shared/shared.service';
-import { User } from 'src/app/shared/user.model';
-import { Post } from '../../shared/post.model';
+import { SharedService } from 'src/app/shared/services/shared.service';
+import { User } from 'src/app/shared/models/user.model';
+import { Post } from '../../shared/models/post.model';
 import { MainService } from '../main.service';
 
 @Component({
@@ -36,7 +36,7 @@ export class PostsComponent implements OnInit {
 
         //Obrnuto sortiranje zbog prikazivanja posljednjeg replya
         this.posts.map(t => t.replies.sort((a,b) => new Date(b.reply_date).getTime() - new Date(a.reply_date).getTime()));
-        
+
         console.log(this.posts);
         /*
         setTimeout(() => {
@@ -53,7 +53,7 @@ export class PostsComponent implements OnInit {
 
     //this.posts = this.mainService.getCategoryPosts(this.name);
     //console.log("rez", this.posts)
-      
+
 
   }
 
