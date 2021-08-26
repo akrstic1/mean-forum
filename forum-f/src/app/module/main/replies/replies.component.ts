@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { Post } from 'src/app/shared/models/post.model';
+import { Post } from 'src/app/data/model/post.model';
 import { SharedService } from 'src/app/shared/services/shared.service';
-import { User } from 'src/app/shared/models/user.model';
+import { User } from 'src/app/data/model/user.model';
 import { MainService } from '../main.service';
 
 @Component({

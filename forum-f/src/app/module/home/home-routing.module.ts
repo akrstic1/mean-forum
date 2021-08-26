@@ -6,12 +6,12 @@ import { PostsComponent } from '../main/posts/posts.component';
 import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
-  {path:'', component:HomepageComponent},
-  {path:':kategorija', loadChildren:() => MainModule}
+  { path: '', component: HomepageComponent },
+  { path: ':kategorija', loadChildren: () => MainModule },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {}

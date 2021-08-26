@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { DataService } from '../services/data.service';
-import { Post } from '../shared/models/post.model';
-import { SharedService } from '../shared/services/shared.service';
+import { DataService } from '../../data/service/data.service';
+import { Post } from '../../data/model/post.model';
+import { SharedService } from '../../shared/services/shared.service';
 
 @Injectable({
   providedIn: 'root',

@@ -4,12 +4,12 @@ import { PostsComponent } from './posts/posts.component';
 import { RepliesComponent } from './replies/replies.component';
 
 const routes: Routes = [
-  {path:'', component : PostsComponent},
-  {path:'post', component : RepliesComponent}
+  { path: '', component: PostsComponent },
+  { path: 'post', component: RepliesComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MainRoutingModule { }
+export class MainRoutingModule {}

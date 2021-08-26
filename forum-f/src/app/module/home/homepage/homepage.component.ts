@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { sharedStylesheetJitUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { DataService } from 'src/app/services/data.service';
-import { Category } from 'src/app/shared/models/category.model';
+import { DataService } from 'src/app/data/service/data.service';
+import { Category } from 'src/app/data/model/category.model';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { HomeService } from '../home.service';
 

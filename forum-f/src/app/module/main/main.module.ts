@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 import { PostsComponent } from './posts/posts.component';
 import { RepliesComponent } from './replies/replies.component';
-import { MatchUserPipe } from '../shared/pipes/match-user.pipe';
-import { SharedModule } from '../shared/shared.module';
+import { MatchUserPipe } from '../../shared/pipes/match-user.pipe';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [PostsComponent, RepliesComponent],
