@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { DataService } from '../../data/service/data.service';
 import { Category } from '../../data/model/category.model';
 
@@ -11,26 +11,28 @@ export class HomeService {
   categories: Category[] = null;
   categorySubject: BehaviorSubject<Category[]> = new BehaviorSubject(null);
 
-  constructor(private dataService: DataService) {
-    this.init();
+  constructor(private _dataService: DataService) {}
+
+  getCategories(): Observable<Category[]> {
+    return this._dataService.getCategories();
   }
 
-  //Dohvaća http request iz dataservica, mapira json u object array,
-  //te preko behaviorsubjecta broadcasta svim subscribeanim komponentama
-  init() {
-    console.log('init homeservice', this.categorySubject);
-    this.dataService
-      .getCategories()
-      .subscribe((res: { status: string; categories: Category[] }) => {
-        this.categories = res.categories;
-        console.log('hvatam i saljem kat', this.categorySubject);
-        this.categorySubject.next(this.categories);
-      });
-  }
+  // //Dohvaća http request iz dataservica, mapira json u object array,
+  // //te preko behaviorsubjecta broadcasta svim subscribeanim komponentama
+  // init() {
+  //   console.log('init homeservice', this.categorySubject);
+  //   this.dataService
+  //     .getCategories()
+  //     .subscribe((res: { status: string; categories: Category[] }) => {
+  //       this.categories = res.categories;
+  //       console.log('hvatam i saljem kat', this.categorySubject);
+  //       this.categorySubject.next(this.categories);
+  //     });
+  // }
 
-  //Vraća subject kategorija
-  getCategories() {
-    console.log('saljem subject', this.categorySubject);
-    return this.categorySubject;
-  }
+  // //Vraća subject kategorija
+  // getCategories() {
+  //   console.log('saljem subject', this.categorySubject);
+  //   return this.categorySubject;
+  // }
 }
