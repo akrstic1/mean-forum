@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Category } from '../model/category.model';
+import { Post } from '../model/post.model';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,15 +19,15 @@ export class DataService {
     return this.http.get<Category[]>(environment.API_URL + '/api/categories');
   }
 
-  getPosts() {
-    return this.http.get(environment.API_URL + '/api/posts');
+  getPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(environment.API_URL + '/api/posts');
   }
 
-  getPost(id) {
-    return this.http.get(environment.API_URL + '/api/posts/' + id);
+  getPost(id): Observable<Post> {
+    return this.http.get<Post>(environment.API_URL + '/api/posts/' + id);
   }
 
-  getUsers() {
-    return this.http.get(environment.API_URL + '/api/users');
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(environment.API_URL + '/api/users');
   }
 }

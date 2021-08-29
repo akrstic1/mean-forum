@@ -7,20 +7,20 @@ import {
 } from '@angular/router';
 import { EMPTY, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Category } from '../model/category.model';
+import { User } from '../model/user.model';
 import { DataService } from '../service/data.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CategoryResolver implements Resolve<Observable<Category[]>> {
+export class UserListResolver implements Resolve<Observable<User[]>> {
   constructor(private dataService: DataService, private router: Router) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Category[]> {
-    return this.dataService.getCategories().pipe(
+  ): Observable<User[]> {
+    return this.dataService.getUsers().pipe(
       catchError((err) => {
         this.router.navigate(['/']);
         return EMPTY;

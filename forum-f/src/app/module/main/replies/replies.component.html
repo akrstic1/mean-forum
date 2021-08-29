@@ -5,17 +5,17 @@
       <div *ngIf="post" class="post">
         <div class="reply_content">
           <div class="reply_user">
-            <a href="#">{{ post[0].user_id | matchUser: users }}</a>
+            <a href="#">{{ post.user_id | matchUser: users }}</a>
           </div>
 
           <div>
             Datum i vrijeme objave: <br />
-            {{ post[0].date | date: "dd.MM.yyyy HH:mm" }}
+            {{ post.date | date: "dd.MM.yyyy HH:mm" }}
           </div>
         </div>
 
         <div class="reply">
-          <p>{{ post[0].text }}</p>
+          <p>{{ post.text }}</p>
         </div>
       </div>
     </div>
@@ -35,16 +35,5 @@
         <p>{{ reply.reply_text }}</p>
       </div>
     </div>
-    <!--
-        <div class="row justify-content-between align-middle">
-            <div class="col-4 d-flex align-items-center bg-light text-black">
-                <p>Kultura</p>
-            </div>
-            <div class="col-4 d-flex flex-column align-items-end">
-                <p>Posljednji post:</p>
-                <p>01.01.2021.</p>
-            </div>
-        </div>
-   -->
   </div>
 </div>

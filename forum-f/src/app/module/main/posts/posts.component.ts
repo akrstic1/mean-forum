@@ -13,11 +13,10 @@ import { MainService } from '../main.service';
   styleUrls: ['./posts.component.css'],
 })
 export class PostsComponent implements OnInit {
-  posts: Post[] = [];
-  name: string;
+  categoryPosts: Post[] = [];
+  categoryPostsResultResponse: Post[];
 
-  postsSubject: BehaviorSubject<Post[]> = new BehaviorSubject([]);
-  subscription: Subscription = null;
+  categoryName: string;
 
   users: User[] = [];
   usersSubject: BehaviorSubject<User[]> = new BehaviorSubject([]);
@@ -30,34 +29,20 @@ export class PostsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.name = this.route.snapshot.params['kategorija'];
+    this.categoryName = this.route.snapshot.params.category;
 
-    this.postsSubject = this.mainService.getCategoryPosts();
-    this.subscription = this.postsSubject.subscribe((res) => {
-      this.posts = res.filter((p) => p.category_name == this.name);
+    this.categoryPostsResultResponse =
+      this.route.snapshot.data.categoryPostsResponse;
 
-      //Obrnuto sortiranje zbog prikazivanja posljednjeg replya
-      this.posts.map((t) =>
-        t.replies.sort(
-          (a, b) =>
-            new Date(b.reply_date).getTime() - new Date(a.reply_date).getTime()
-        )
-      );
+    //Obrnuto sortiranje zbog prikazivanja posljednjeg replya
+    this.categoryPostsResultResponse.map((t) =>
+      t.replies.sort(
+        (a, b) =>
+          new Date(b.reply_date).getTime() - new Date(a.reply_date).getTime()
+      )
+    );
 
-      console.log(this.posts);
-      /*
-        setTimeout(() => {
-          console.log(formatDate(this.posts[0].date, 'dd-MM-yyyy HH:mm:ss', this.locale));
-        }, 2000);
-        */
-    });
-
-    this.usersSubject = this.sharedService.getUsers();
-    this.subscription = this.usersSubject.subscribe((res) => {
-      this.users = res;
-    });
-
-    //this.posts = this.mainService.getCategoryPosts(this.name);
-    //console.log("rez", this.posts)
+    this.categoryPosts = this.categoryPostsResultResponse;
+    this.users = this.route.snapshot.data.userListResponse;
   }
 }

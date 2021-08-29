@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable, Subscription } from 'rxjs';
 import { DataService } from '../../data/service/data.service';
 import { Post } from '../../data/model/post.model';
 import { SharedService } from '../../shared/services/shared.service';
+import { catchError, map } from 'rxjs/operators';
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  Router,
+} from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MainService {
+  categoryToFilter: string;
+
   posts: Post[] = [];
   postsSubject: BehaviorSubject<Post[]> = new BehaviorSubject([]);
   subscription: Subscription = null;
@@ -17,48 +25,28 @@ export class MainService {
 
   constructor(
     private dataService: DataService,
-    private sharedService: SharedService
-  ) {
-    this.init();
-  }
+    private sharedService: SharedService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  init() {
-    this.dataService
+  getCategoryPosts(): Observable<Post[]> {
+    this.categoryToFilter = this.route.snapshot.params.category;
+
+    return this.dataService
       .getPosts()
-      .subscribe((res: { status: string; posts: Post[] }) => {
-        this.posts = res.posts;
-
-        //Sortira datume samih tema za pravilno priakzivanje
-        this.posts.sort(
-          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-        );
-        //Sortira replies na teme za pravilno prikazivanje
-        this.posts.map((t) =>
-          t.replies.sort(
-            (a, b) =>
-              new Date(a.reply_date).getTime() -
-              new Date(b.reply_date).getTime()
-          )
-        );
-
-        //console.log("sub", this.posts);
-        this.postsSubject.next(this.posts);
-      });
-  }
-
-  getCategoryPosts() {
-    //console.log("saljem", this.postsSubject)
-    return this.postsSubject;
+      .pipe(
+        map((x) => x.filter((p) => p.category_name === this.categoryToFilter))
+      );
   }
 
   getPost(id: string) {
-    this.dataService
-      .getPost(id)
-      .subscribe((res: { status: string; post: Post }) => {
-        this.post = res.post;
-        this.postSubject.next(this.post);
-      });
-    return this.postSubject;
+    return this.dataService.getPost(id).pipe(
+      catchError((err) => {
+        this.router.navigate(['/']);
+        return EMPTY;
+      })
+    );
   }
 
   /*

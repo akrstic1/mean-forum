@@ -18,30 +18,27 @@ module.exports = function (app, express, db, jwt, secret) {
   apiRouter.route('/posts').get(async function (req, res) {
     try {
       let posts = await db.collection('posts').find({}).toArray();
-      res.json({ status: 'OK', posts });
+      res.json(posts);
     } catch (e) {
-      res.json({ status: 'NOT OK' });
+      res.sendStatus(404);
     }
   });
 
   apiRouter.route('/posts/:id').get(async function (req, res) {
     try {
-      let post = await db
-        .collection('posts')
-        .find({ _id: ObjectId(req.params.id) })
-        .toArray();
-      res.json({ status: 'OK', post });
+      let post = await db.collection('posts').findOne({ _id: ObjectId(req.params.id) });
+      res.json(post);
     } catch (e) {
-      res.json({ status: 'NOT OK' });
+      res.sendStatus(404);
     }
   });
 
   apiRouter.route('/users').get(async function (req, res) {
     try {
       let users = await db.collection('users').find({}).project({ password: 0 }).toArray();
-      res.json({ status: 'OK', users });
+      res.json(users);
     } catch (e) {
-      res.json({ status: 'NOT OK' });
+      res.sendStatus(404);
     }
   });
 

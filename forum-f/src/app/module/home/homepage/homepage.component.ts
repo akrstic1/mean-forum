@@ -14,21 +14,24 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent implements OnInit {
-  categories: Category[] = null;
+  categories: Category[] = [];
   categoryResultResponse: Category[];
 
   constructor(
     private http: HttpClient,
-    private homeService: HomeService,
-    private sharedService: SharedService,
+    private _homeService: HomeService,
+    private _sharedService: SharedService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.categoryResultResponse = this.route.snapshot.data.categoryResponse;
-
-    console.log(this.categoryResultResponse);
-
     this.categories = this.categoryResultResponse;
+  }
+
+  refreshCategories() {
+    this._homeService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
   }
 }

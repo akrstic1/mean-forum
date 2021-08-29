@@ -13,7 +13,7 @@ const routes: Routes = [
       categoryResponse: CategoryResolver,
     },
   },
-  { path: ':kategorija', loadChildren: () => MainModule },
+  { path: ':category', loadChildren: () => MainModule },
 ];
 
 @NgModule({

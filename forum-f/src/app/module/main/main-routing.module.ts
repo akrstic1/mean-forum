@@ -1,11 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CategoryPostsResolver } from 'src/app/data/resolver/category-posts.resolver';
+import { PostResolver } from 'src/app/data/resolver/post.resolver';
+import { UserListResolver } from 'src/app/data/resolver/user-list.resolver';
 import { PostsComponent } from './posts/posts.component';
 import { RepliesComponent } from './replies/replies.component';
 
 const routes: Routes = [
-  { path: '', component: PostsComponent },
-  { path: 'post', component: RepliesComponent },
+  {
+    path: '',
+    component: PostsComponent,
+    resolve: {
+      categoryPostsResponse: CategoryPostsResolver,
+      userListResponse: UserListResolver,
+    },
+  },
+  {
+    path: 'post',
+    component: RepliesComponent,
+    resolve: {
+      postResponse: PostResolver,
+      userListResponse: UserListResolver,
+    },
+  },
 ];
 
 @NgModule({
