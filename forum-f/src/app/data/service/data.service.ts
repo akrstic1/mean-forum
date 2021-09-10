@@ -38,4 +38,14 @@ export class DataService {
       reply
     );
   }
+
+  deleteReply(postId: string, replyId: string) {
+    return this.http.put(
+      environment.API_URL + '/api/posts/' + postId,
+      {
+        replyId,
+      },
+      { responseType: 'text' }
+    );
+  }
 }

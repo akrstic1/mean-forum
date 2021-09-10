@@ -54,6 +54,10 @@ export class MainService {
     return this.dataService.addReply(newReply, postId);
   }
 
+  deleteReply(postId: string, replyId: string) {
+    return this.dataService.deleteReply(postId, replyId);
+  }
+
   /*
   getCategoryPosts(name){
     console.log("trazim", name)

@@ -68,4 +68,10 @@ export class RepliesComponent implements OnInit {
       });
     }
   }
+
+  deleteReply(replyId: string) {
+    this.mainService.deleteReply(this.post_id, replyId).subscribe((p) => {
+      this.refreshPost();
+    });
+  }
 }

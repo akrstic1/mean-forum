@@ -53,6 +53,16 @@ module.exports = function (app, express, db, jwt, secret) {
       } catch (e) {
         res.sendStatus(404);
       }
+    })
+    .put(async function (req, res) {
+      try {
+        let posts = await db
+          .collection('posts')
+          .updateOne({ _id: ObjectId(req.params.id) }, { $pull: { replies: { _id: ObjectId(req.body.replyId) } } });
+        res.sendStatus(200);
+      } catch (e) {
+        res.sendStatus(404);
+      }
     });
 
   apiRouter.route('/users').get(async function (req, res) {
