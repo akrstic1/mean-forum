@@ -1,7 +1,10 @@
-<div class="container">
+<div
+  class="container justify-content-center"
+  style="background-color: lightgray"
+>
   <!--LISTA KATEGORIJA  -->
   <div *ngIf="users">
-    <div class="main_post">
+    <div class="main_post row align-items-center justify-content-between">
       <div *ngIf="post" class="post">
         <div class="reply_content">
           <div class="reply_user">
@@ -19,8 +22,12 @@
         </div>
       </div>
     </div>
-    <div *ngFor="let reply of replies; let i = index" class="post">
-      <div class="reply_content">
+    <div
+      *ngFor="let reply of replies; let i = index"
+      class="post row align-items-center justify-content-between m-2"
+      style="background-color: gray"
+    >
+      <div class="reply_content col-4">
         <div class="reply_user">
           <a href="#">{{ reply.reply_user_id | matchUser: users }}</a>
         </div>
@@ -31,9 +38,28 @@
         </div>
       </div>
 
-      <div class="reply">
+      <div class="reply col-6">
         <p>{{ reply.reply_text }}</p>
+      </div>
+
+      <div class="col-2">
+        <button class="btn btn-danger">Delete</button>
       </div>
     </div>
   </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="newReply">Write a reply</label>
+      <textarea
+        class="form-control"
+        id="newReply"
+        rows="3"
+        formControlName="reply"
+      ></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2" [disabled]="!form.valid">
+      Post
+    </button>
+  </form>
 </div>

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Category } from '../model/category.model';
 import { Post } from '../model/post.model';
 import { User } from '../model/user.model';
+import { Reply } from '../model/reply.model';
 
 @Injectable({
   providedIn: 'root',
@@ -29,5 +30,12 @@ export class DataService {
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(environment.API_URL + '/api/users');
+  }
+
+  addReply(reply: Reply, id: string): Observable<Reply> {
+    return this.http.post<Reply>(
+      environment.API_URL + '/api/posts/' + id,
+      reply
+    );
   }
 }

@@ -24,14 +24,36 @@ module.exports = function (app, express, db, jwt, secret) {
     }
   });
 
-  apiRouter.route('/posts/:id').get(async function (req, res) {
-    try {
-      let post = await db.collection('posts').findOne({ _id: ObjectId(req.params.id) });
-      res.json(post);
-    } catch (e) {
-      res.sendStatus(404);
-    }
-  });
+  apiRouter
+    .route('/posts/:id')
+    .get(async function (req, res) {
+      try {
+        let post = await db.collection('posts').findOne({ _id: ObjectId(req.params.id) });
+        res.json(post);
+      } catch (e) {
+        res.sendStatus(404);
+      }
+    })
+    .post(async function (req, res) {
+      try {
+        let posts = await db.collection('posts').updateOne(
+          { _id: ObjectId(req.params.id) },
+          {
+            $push: {
+              replies: {
+                _id: new ObjectId(),
+                reply_text: req.body.reply_text,
+                reply_user_id: req.body.reply_user_id,
+                reply_date: req.body.reply_date,
+              },
+            },
+          }
+        );
+        res.json(posts);
+      } catch (e) {
+        res.sendStatus(404);
+      }
+    });
 
   apiRouter.route('/users').get(async function (req, res) {
     try {

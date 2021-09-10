@@ -9,6 +9,7 @@ import {
   ActivatedRouteSnapshot,
   Router,
 } from '@angular/router';
+import { Reply } from 'src/app/data/model/reply.model';
 
 @Injectable({
   providedIn: 'root',
@@ -47,6 +48,10 @@ export class MainService {
         return EMPTY;
       })
     );
+  }
+
+  addReply(newReply: Reply, postId: string): Observable<Reply> {
+    return this.dataService.addReply(newReply, postId);
   }
 
   /*
