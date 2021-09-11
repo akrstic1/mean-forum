@@ -15,8 +15,6 @@ import { Reply } from 'src/app/data/model/reply.model';
   providedIn: 'root',
 })
 export class MainService {
-  categoryToFilter: string;
-
   posts: Post[] = [];
   postsSubject: BehaviorSubject<Post[]> = new BehaviorSubject([]);
   subscription: Subscription = null;
@@ -31,14 +29,10 @@ export class MainService {
     private router: Router
   ) {}
 
-  getCategoryPosts(): Observable<Post[]> {
-    this.categoryToFilter = this.route.snapshot.params.category;
-
+  getCategoryPosts(categoryToFilter: string): Observable<Post[]> {
     return this.dataService
       .getPosts()
-      .pipe(
-        map((x) => x.filter((p) => p.category_name === this.categoryToFilter))
-      );
+      .pipe(map((x) => x.filter((p) => p.category_id === categoryToFilter)));
   }
 
   getPost(id: string) {
@@ -58,16 +52,7 @@ export class MainService {
     return this.dataService.deleteReply(postId, replyId);
   }
 
-  /*
-  getCategoryPosts(name){
-    console.log("trazim", name)
-    return this.posts.filter(p => p.category_name == name);
+  addPost(newPost: Post): Observable<any> {
+    return this.dataService.addPost(newPost);
   }
-
-
-  getCategoryPosts(id){
-    console.log("metoda")
-    return this.posts.filter( p => p.category_id == id);
-  }
-  */
 }

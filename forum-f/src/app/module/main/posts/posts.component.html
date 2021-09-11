@@ -1,6 +1,49 @@
 <div class="container">
   <h2>{{ categoryName }}</h2>
 
+  <div class="m-4">
+    <button
+      class="btn btn-primary"
+      type="button"
+      data-toggle="collapse"
+      data-target="#newPostForm"
+      aria-expanded="false"
+      aria-controls="newPostForm"
+    >
+      Dodaj novu temu
+    </button>
+    <div class="collapse" id="newPostForm">
+      <div class="card card-body">
+        <form [formGroup]="form" (ngSubmit)="addPost()">
+          <div class="form-group">
+            <label for="postName">Naziv teme</label>
+            <input
+              type="text"
+              class="form-control"
+              id="postName"
+              formControlName="postName"
+            />
+
+            <label for="postText">Tekst</label>
+            <textarea
+              class="form-control"
+              id="postText"
+              rows="3"
+              formControlName="postText"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary mb-2"
+            [disabled]="!form.valid"
+          >
+            Post
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!--LISTA KATEGORIJA-->
   <div>
     <div
@@ -25,12 +68,15 @@
         </div>
       </div>
 
-      <div class="last_reply">
+      <div *ngIf="post.replies.length != 0; else noReplies" class="last_reply">
         Posljednja Objava:
         {{ post.replies[0].reply_date | date: "dd.MM.yyyy HH:mm" }} <br />
         Od Korisnika:
         <a href="#">{{ post.replies[0].reply_user_id | matchUser: users }}</a>
       </div>
+      <ng-template #noReplies>
+        <div class="last_reply">Ne postoje objave na ovoj temi</div>
+      </ng-template>
     </div>
   </div>
 </div>

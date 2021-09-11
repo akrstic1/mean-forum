@@ -23,14 +23,13 @@ export class CategoryPostsResolver implements Resolve<Observable<Post[]>> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Post[]> {
-    this.categoryToFilter = route.params.category;
+    this.categoryToFilter = route.queryParams.categoryId;
 
     return this.dataService.getPosts().pipe(
       map((x) => {
-        return x.filter((p) => p.category_name === this.categoryToFilter);
+        return x.filter((p) => p.category_id === this.categoryToFilter);
       }),
       catchError((err) => {
-        console.log(err);
         this.router.navigate(['/']);
         return EMPTY;
       })

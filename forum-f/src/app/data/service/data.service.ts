@@ -48,4 +48,8 @@ export class DataService {
       { responseType: 'text' }
     );
   }
+
+  addPost(post: Post): Observable<any> {
+    return this.http.post<Post>(environment.API_URL + '/api/posts/', post);
+  }
 }

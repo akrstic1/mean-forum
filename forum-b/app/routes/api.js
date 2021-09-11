@@ -15,14 +15,39 @@ module.exports = function (app, express, db, jwt, secret) {
       });
   });
 
-  apiRouter.route('/posts').get(async function (req, res) {
-    try {
-      let posts = await db.collection('posts').find({}).toArray();
-      res.json(posts);
-    } catch (e) {
-      res.sendStatus(404);
-    }
-  });
+  apiRouter
+    .route('/posts')
+    .get(async function (req, res) {
+      try {
+        let posts = await db.collection('posts').find({}).toArray();
+        res.json(posts);
+      } catch (e) {
+        res.sendStatus(404);
+      }
+    })
+    .post(async function (req, res) {
+      try {
+        let newPost = {
+          text: req.body.text,
+          user_id: req.body.user_id,
+          category_id: req.body.category_id,
+          category_name: req.body.category_name,
+          theme: req.body.theme,
+          replies: req.body.replies,
+          date: req.body.date,
+        };
+
+        await db.collection('posts').insertOne(newPost, function (err, data) {
+          if (!err) {
+            res.json(200);
+          } else {
+            res.json(404);
+          }
+        });
+      } catch (e) {
+        res.json(404);
+      }
+    });
 
   apiRouter
     .route('/posts/:id')
