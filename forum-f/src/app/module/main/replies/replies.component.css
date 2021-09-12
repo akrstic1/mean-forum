@@ -2,7 +2,7 @@ p {
   word-break: break-all;
 }
 
-.reply {
+.reply-container {
   background-color: whitesmoke;
-  grid: 1px black solid;
+  border: 1px solid black;
 }

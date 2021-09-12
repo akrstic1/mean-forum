@@ -2,7 +2,7 @@
   <!--POZDRAV USERU-->
   <div class="row user">
     <div class="col-6">
-      Dobrodošao, USER <br />
+      Dobrodošao<br />
       <div class="account-buttons">
         <button class="btn btn-info">Postavke računa</button><br />
         <button class="btn btn-info">Odjava</button>
@@ -10,22 +10,22 @@
     </div>
   </div>
 
-  <!--LISTA KATEGORIJA-->
-  <div class="container kategorije">
-    <div
-      *ngFor="let category of categories; let i = index"
-      class="row justify-content-between align-middle bg-dark text-white"
-    >
-      <div class="col-4 d-flex align-items-center">
-        <a
-          [routerLink]="[category.name]"
-          [queryParams]="{ categoryId: category._id }"
-          >{{ category.name }}</a
-        >
-      </div>
-      <div class="col-4 d-flex flex-column align-items-end">
-        <p>Posljednji post:</p>
-        <p>01.01.2021.</p>
+  <div class="container p-0">
+    <div class="pb-2">
+      <div
+        *ngFor="let category of categories; let i = index"
+        class="mb-2 mt-2 p-4 category"
+        style="text-align: center"
+      >
+        <div>
+          <h3>
+            <a
+              [routerLink]="[category.name]"
+              [queryParams]="{ categoryId: category._id }"
+              >{{ category.name }}</a
+            >
+          </h3>
+        </div>
       </div>
     </div>
   </div>

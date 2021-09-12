@@ -10,7 +10,7 @@
         class="post row align-items-center justify-content-between"
         style="background-color: lightblue"
       >
-        <div class="reply_content col-2">
+        <div class="reply_content col-3">
           <div class="reply_user">
             <a href="#">{{ post.user_id | matchUser: users }}</a>
           </div>
@@ -38,7 +38,7 @@
           </div>
         </div>
 
-        <div class="mt-2 col-10">
+        <div class="mt-2 col-9">
           <h4>Naslov teme: {{ post.theme }}</h4>
           <p>{{ post.text }}</p>
           <p>Broj lajkova: {{ likesArray.length }}</p>
@@ -47,7 +47,7 @@
     </div>
     <div
       *ngFor="let reply of replies; let i = index"
-      class="reply row align-items-center justify-content-between m-2"
+      class="reply-container row align-items-center justify-content-between m-2"
     >
       <div class="reply_content col-4">
         <div class="reply_user">

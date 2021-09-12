@@ -17,6 +17,8 @@ export class HomepageComponent implements OnInit {
   categories: Category[] = [];
   categoryResultResponse: Category[];
 
+  currentUserId = '60264b497bdf922a180ddd29';
+
   constructor(
     private http: HttpClient,
     private _homeService: HomeService,
