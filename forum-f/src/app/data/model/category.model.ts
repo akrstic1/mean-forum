@@ -1,6 +1,5 @@
 export class Category {
-  public constructor(_id: string, name: string) {
-    this._id = _id;
+  public constructor(name: string) {
     this.name = name;
   }
   _id: string;

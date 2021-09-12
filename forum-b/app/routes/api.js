@@ -2,18 +2,37 @@ module.exports = function (app, express, db, jwt, secret) {
   let apiRouter = express.Router();
   let ObjectId = require('mongodb').ObjectId;
 
-  apiRouter.route('/categories').get(function (req, res) {
-    //res.json({ message:"Dobro dosli u api"});
-    db.collection('category')
-      .find({})
-      .toArray(function (err, categories) {
-        if (!err) {
-          res.json(categories);
-        } else {
-          res.sendStatus(404);
-        }
-      });
-  });
+  apiRouter
+    .route('/categories')
+    .get(function (req, res) {
+      //res.json({ message:"Dobro dosli u api"});
+      db.collection('category')
+        .find({})
+        .toArray(function (err, categories) {
+          if (!err) {
+            res.json(categories);
+          } else {
+            res.sendStatus(404);
+          }
+        });
+    })
+    .post(async function (req, res) {
+      try {
+        let newCategory = {
+          name: req.body.name,
+        };
+
+        await db.collection('category').insertOne(newCategory, function (err, data) {
+          if (!err) {
+            res.json(200);
+          } else {
+            res.json(404);
+          }
+        });
+      } catch (e) {
+        res.json(404);
+      }
+    });
 
   apiRouter
     .route('/posts')

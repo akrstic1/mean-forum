@@ -20,6 +20,10 @@ export class DataService {
     return this.http.get<Category[]>(environment.API_URL + '/api/categories');
   }
 
+  addCategory(category: Category): Observable<any> {
+    return this.http.post(environment.API_URL + '/api/categories', category);
+  }
+
   getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(environment.API_URL + '/api/posts');
   }

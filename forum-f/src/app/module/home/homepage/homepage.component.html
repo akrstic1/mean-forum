@@ -1,11 +1,35 @@
 <div class="container">
-  <!--POZDRAV USERU-->
-  <div class="row user">
-    <div class="col-6">
-      Dobrodošao<br />
-      <div class="account-buttons">
-        <button class="btn btn-info">Postavke računa</button><br />
-        <button class="btn btn-info">Odjava</button>
+  <div class="m-4">
+    <button
+      class="btn btn-primary"
+      type="button"
+      data-toggle="collapse"
+      data-target="#newCategoryForm"
+      aria-expanded="false"
+      aria-controls="newCategoryForm"
+    >
+      Dodaj novu kategoriju
+    </button>
+    <div class="collapse pt-1" id="newCategoryForm">
+      <div class="card card-body" style="background-color: whitesmoke">
+        <form [formGroup]="form" (ngSubmit)="addCategory()">
+          <div class="form-group">
+            <label for="categoryName">Naziv kategorije</label>
+            <input
+              type="text"
+              class="form-control"
+              id="categoryName"
+              formControlName="categoryName"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary mb-2"
+            [disabled]="!form.valid"
+          >
+            Post
+          </button>
+        </form>
       </div>
     </div>
   </div>

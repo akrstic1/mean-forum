@@ -17,6 +17,10 @@ export class HomeService {
     return this._dataService.getCategories();
   }
 
+  addCategory(newCategory: Category): Observable<any> {
+    return this._dataService.addCategory(newCategory);
+  }
+
   // //Dohvaća http request iz dataservica, mapira json u object array,
   // //te preko behaviorsubjecta broadcasta svim subscribeanim komponentama
   // init() {
