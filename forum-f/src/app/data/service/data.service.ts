@@ -56,4 +56,20 @@ export class DataService {
   deletePost(id: string): Observable<any> {
     return this.http.delete(environment.API_URL + '/api/posts/' + id);
   }
+
+  getLikes(id: string): Observable<any> {
+    return this.http.get<any>(environment.API_URL + `/api/posts/${id}/likes`);
+  }
+
+  likePost(userId: string, postId: string): Observable<any> {
+    return this.http.post<any>(
+      environment.API_URL + `/api/posts/${postId}/likes/${userId}`,
+      {}
+    );
+  }
+  unlikePost(userId: string, postId: string): Observable<any> {
+    return this.http.delete(
+      environment.API_URL + `/api/posts/${postId}/likes/${userId}`
+    );
+  }
 }

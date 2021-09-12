@@ -59,4 +59,15 @@ export class MainService {
   deletePost(postId: string): Observable<any> {
     return this.dataService.deletePost(postId);
   }
+
+  getLikes(id: string): Observable<any> {
+    return this.dataService.getLikes(id);
+  }
+
+  likePost(userId: string, postId: string): Observable<any> {
+    return this.dataService.likePost(userId, postId);
+  }
+  unlikePost(userId: string, postId: string): Observable<any> {
+    return this.dataService.unlikePost(userId, postId);
+  }
 }

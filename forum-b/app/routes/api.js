@@ -100,6 +100,59 @@ module.exports = function (app, express, db, jwt, secret) {
       }
     });
 
+  apiRouter.route('/posts/:id/likes/').get(async function (req, res) {
+    try {
+      let likes = await db.collection('likes').find({ post_id: req.params.id }).project({ user_id: 1 }).toArray();
+      res.json(likes);
+    } catch (e) {
+      res.json(404);
+    }
+  });
+
+  apiRouter
+    .route('/posts/:postId/likes/:userId')
+    .post(async function (req, res) {
+      try {
+        let isLiked = await db
+          .collection('likes')
+          .find({ user_id: req.params.userId, post_id: req.params.postId })
+          .toArray();
+
+        if (isLiked.length == 0) {
+          let newLike = {
+            post_id: req.params.postId,
+            user_id: req.params.userId,
+          };
+
+          await db.collection('likes').insertOne(newLike, function (err, data) {
+            if (!err) {
+              res.json(200);
+            } else {
+              res.json(404, 'yoo');
+            }
+          });
+        } else {
+          res.json(304);
+        }
+      } catch (e) {
+        res.json(405);
+      }
+    })
+    .delete(async function (req, res) {
+      try {
+        let isLiked = await db
+          .collection('likes')
+          .find({ user_id: req.params.userId, post_id: req.params.postId })
+          .toArray();
+        if (isLiked.length != 0) {
+          await db.collection('likes').removeOne({ user_id: req.params.userId, post_id: req.params.postId });
+        }
+        res.json({ status: 'OK' });
+      } catch (e) {
+        res.json({ status: 'NOT OK' });
+      }
+    });
+
   apiRouter.route('/users').get(async function (req, res) {
     try {
       let users = await db.collection('users').find({}).project({ password: 0 }).toArray();

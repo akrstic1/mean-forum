@@ -19,11 +19,29 @@
             Datum i vrijeme objave: <br />
             {{ post.date | date: "dd.MM.yyyy HH:mm" }}
           </div>
+
+          <div class="p-2">
+            <button
+              *ngIf="userLikeFlag"
+              (click)="likePost(currentUserId, post_id)"
+              class="btn btn-success"
+            >
+              Lajk
+            </button>
+            <button
+              *ngIf="!userLikeFlag"
+              (click)="unlikePost(currentUserId, post_id)"
+              class="btn btn-danger"
+            >
+              Unlajk
+            </button>
+          </div>
         </div>
 
         <div class="mt-2 col-10">
           <h4>Naslov teme: {{ post.theme }}</h4>
           <p>{{ post.text }}</p>
+          <p>Broj lajkova: {{ likesArray.length }}</p>
         </div>
       </div>
     </div>

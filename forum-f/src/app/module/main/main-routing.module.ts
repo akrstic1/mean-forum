@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CategoryPostsResolver } from 'src/app/data/resolver/category-posts.resolver';
+import { LikeResolver } from 'src/app/data/resolver/like.resolver';
 import { PostResolver } from 'src/app/data/resolver/post.resolver';
 import { UserListResolver } from 'src/app/data/resolver/user-list.resolver';
 import { PostsComponent } from './posts/posts.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
     resolve: {
       postResponse: PostResolver,
       userListResponse: UserListResolver,
+      likeResponse: LikeResolver,
     },
   },
 ];

@@ -14,11 +14,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./replies.component.css'],
 })
 export class RepliesComponent implements OnInit {
+  currentUserId: string = '60264b497bdf922a180ddd29';
+
   kategorija: string;
   post_id: string;
 
   post: Post;
   replies: Reply[] = [];
+  likes = [];
+  likesArray = [];
+
+  userLikeFlag = true;
 
   users: User[];
 
@@ -39,6 +45,15 @@ export class RepliesComponent implements OnInit {
 
     this.users = this.route.snapshot.data.userListResponse;
     this.post = this.route.snapshot.data.postResponse;
+    this.likes = this.route.snapshot.data.likeResponse;
+    this.likesArray = this.likes.map((p) => {
+      return p.user_id;
+    });
+
+    if (this.likesArray.includes(this.currentUserId)) {
+      this.userLikeFlag = false;
+    }
+
     if (this.post != null) {
       this.replies = this.post.replies;
     }
@@ -48,6 +63,18 @@ export class RepliesComponent implements OnInit {
     });
   }
 
+  setLikeFlagAndLikeArray() {
+    this.likesArray = this.likes.map((p) => {
+      return p.user_id;
+    });
+
+    if (this.likesArray.includes(this.currentUserId)) {
+      this.userLikeFlag = false;
+    } else {
+      this.userLikeFlag = true;
+    }
+  }
+
   refreshPost() {
     this.mainService.getPost(this.post_id).subscribe((post) => {
       this.post = post;
@@ -55,11 +82,18 @@ export class RepliesComponent implements OnInit {
     });
   }
 
+  refreshLikes() {
+    this.mainService.getLikes(this.post_id).subscribe((likes) => {
+      this.likes = likes;
+      this.setLikeFlagAndLikeArray();
+    });
+  }
+
   onSubmit() {
     if (this.form.valid) {
       this.newReply = new Reply(
         this.form.get('reply').value,
-        '60264b497bdf922a180ddd29', //TODO umetnut logiranog usera
+        this.currentUserId, //TODO umetnut logiranog usera
         new Date()
       );
       this.mainService.addReply(this.newReply, this.post_id).subscribe((p) => {
@@ -72,6 +106,17 @@ export class RepliesComponent implements OnInit {
   deleteReply(replyId: string) {
     this.mainService.deleteReply(this.post_id, replyId).subscribe((p) => {
       this.refreshPost();
+    });
+  }
+
+  likePost(userId: string, postId: string) {
+    this.mainService.likePost(userId, postId).subscribe((p) => {
+      this.refreshLikes();
+    });
+  }
+  unlikePost(userId: string, postId: string) {
+    this.mainService.unlikePost(userId, postId).subscribe((p) => {
+      this.refreshLikes();
     });
   }
 }
