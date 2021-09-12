@@ -84,4 +84,11 @@ export class PostsComponent implements OnInit {
       });
     }
   }
+
+  deletePost(postId: string) {
+    this.mainService.deletePost(postId).subscribe((p) => {
+      console.log('refreshed');
+      this.refreshPost();
+    });
+  }
 }

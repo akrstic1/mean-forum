@@ -72,10 +72,19 @@
         Posljednja Objava:
         {{ post.replies[0].reply_date | date: "dd.MM.yyyy HH:mm" }} <br />
         Od Korisnika:
-        <a href="#">{{ post.replies[0].reply_user_id | matchUser: users }}</a>
+        <a href="#">{{ post.replies[0].reply_user_id | matchUser: users }}</a
+        ><br />
+        <button (click)="deletePost(post._id)" class="btn btn-danger">
+          Delete
+        </button>
       </div>
       <ng-template #noReplies>
-        <div class="last_reply">Ne postoje objave na ovoj temi</div>
+        <div class="last_reply">
+          Ne postoje objave na ovoj temi <br />
+          <button (click)="deletePost(post._id)" class="btn btn-danger">
+            Delete
+          </button>
+        </div>
       </ng-template>
     </div>
   </div>

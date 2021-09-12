@@ -52,4 +52,8 @@ export class DataService {
   addPost(post: Post): Observable<any> {
     return this.http.post<Post>(environment.API_URL + '/api/posts/', post);
   }
+
+  deletePost(id: string): Observable<any> {
+    return this.http.delete(environment.API_URL + '/api/posts/' + id);
+  }
 }

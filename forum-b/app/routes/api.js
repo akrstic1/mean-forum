@@ -88,6 +88,16 @@ module.exports = function (app, express, db, jwt, secret) {
       } catch (e) {
         res.sendStatus(404);
       }
+    })
+    .delete(async function (req, res) {
+      try {
+        await db.collection('posts').removeOne({
+          _id: ObjectId(req.params.id),
+        });
+        res.json({ status: 'OK' });
+      } catch (e) {
+        res.json({ status: 'NOT OK' });
+      }
     });
 
   apiRouter.route('/users').get(async function (req, res) {

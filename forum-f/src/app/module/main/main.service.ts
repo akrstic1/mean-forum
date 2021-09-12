@@ -55,4 +55,8 @@ export class MainService {
   addPost(newPost: Post): Observable<any> {
     return this.dataService.addPost(newPost);
   }
+
+  deletePost(postId: string): Observable<any> {
+    return this.dataService.deletePost(postId);
+  }
 }
