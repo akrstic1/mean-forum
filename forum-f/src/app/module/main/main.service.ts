@@ -48,6 +48,10 @@ export class MainService {
     return this.dataService.addReply(newReply, postId);
   }
 
+  editReply(replyId: string, replyText: string, postId: string) {
+    return this.dataService.editReply(replyId, replyText, postId);
+  }
+
   deleteReply(postId: string, replyId: string) {
     return this.dataService.deleteReply(postId, replyId);
   }

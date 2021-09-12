@@ -100,6 +100,21 @@ module.exports = function (app, express, db, jwt, secret) {
       }
     });
 
+  apiRouter.route('/posts/:postId/reply/:replyId').put(async function (req, res) {
+    try {
+      let posts = await db.collection('posts').update(
+        {
+          _id: ObjectId(req.params.postId),
+          replies: { $elemMatch: { _id: ObjectId(req.params.replyId) } },
+        },
+        { $set: { 'replies.$.reply_text': req.body.replyText } }
+      );
+      res.json({ status: 'ok' });
+    } catch (e) {
+      res.json({ status: 'not ok' });
+    }
+  });
+
   apiRouter.route('/posts/:id/likes/').get(async function (req, res) {
     try {
       let likes = await db.collection('likes').find({ post_id: req.params.id }).project({ user_id: 1 }).toArray();

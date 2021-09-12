@@ -39,6 +39,15 @@ export class DataService {
     );
   }
 
+  editReply(replyId: string, replyText: string, postId: string) {
+    return this.http.put(
+      environment.API_URL + `/api/posts/${postId}/reply/${replyId}`,
+      {
+        replyText: replyText,
+      }
+    );
+  }
+
   deleteReply(postId: string, replyId: string): Observable<string> {
     return this.http.put(
       environment.API_URL + '/api/posts/' + postId,

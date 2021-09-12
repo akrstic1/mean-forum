@@ -31,6 +31,8 @@ export class RepliesComponent implements OnInit {
   form: FormGroup;
   newReply: Reply;
 
+  formEdit: FormGroup;
+
   constructor(
     private route: ActivatedRoute,
     private mainService: MainService,
@@ -60,6 +62,11 @@ export class RepliesComponent implements OnInit {
 
     this.form = this.fb.group({
       reply: ['', Validators.required],
+    });
+
+    this.formEdit = this.fb.group({
+      replyEdit: ['', Validators.required],
+      replyId: [''],
     });
   }
 
@@ -107,6 +114,21 @@ export class RepliesComponent implements OnInit {
     this.mainService.deleteReply(this.post_id, replyId).subscribe((p) => {
       this.refreshPost();
     });
+  }
+
+  editReply() {
+    if (this.formEdit.valid) {
+      this.mainService
+        .editReply(
+          this.formEdit.get('replyId').value,
+          this.formEdit.get('replyEdit').value,
+          this.post_id
+        )
+        .subscribe((p) => {
+          console.log(p);
+          this.refreshPost();
+        });
+    }
   }
 
   likePost(userId: string, postId: string) {
