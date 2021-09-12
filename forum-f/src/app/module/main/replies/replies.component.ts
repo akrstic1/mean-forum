@@ -30,6 +30,7 @@ export class RepliesComponent implements OnInit {
 
   form: FormGroup;
   newReply: Reply;
+  submitted: boolean = false;
 
   formEdit: FormGroup;
 
@@ -97,6 +98,7 @@ export class RepliesComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
     if (this.form.valid) {
       this.newReply = new Reply(
         this.form.get('reply').value,
@@ -106,6 +108,7 @@ export class RepliesComponent implements OnInit {
       this.mainService.addReply(this.newReply, this.post_id).subscribe((p) => {
         this.refreshPost();
         this.form.reset();
+        this.submitted = false;
       });
     }
   }

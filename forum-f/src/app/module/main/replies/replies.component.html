@@ -84,7 +84,7 @@
   </div>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="form-group">
+    <fieldset class="form-group">
       <label for="newReply">Napiši odgovor</label>
       <textarea
         class="form-control"
@@ -92,10 +92,18 @@
         rows="3"
         formControlName="reply"
       ></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary mb-2" [disabled]="!form.valid">
-      Pošalji
-    </button>
+      <span
+        class="text-danger"
+        *ngIf="
+          (form.controls.reply.touched || submitted) &&
+          form.controls.reply.errors?.required
+        "
+      >
+        Potrebno je unijeti tekst odgovora
+      </span>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary mb-2">Pošalji</button>
   </form>
 </div>
 

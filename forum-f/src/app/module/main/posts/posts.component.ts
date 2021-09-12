@@ -26,6 +26,7 @@ export class PostsComponent implements OnInit {
 
   form: FormGroup;
   newPost: Post;
+  submitted: boolean = false;
 
   constructor(
     private sharedService: SharedService,
@@ -68,6 +69,7 @@ export class PostsComponent implements OnInit {
   }
 
   addPost() {
+    this.submitted = true;
     if (this.form.valid) {
       this.newPost = new Post(
         this.form.get('postText').value,
@@ -81,6 +83,7 @@ export class PostsComponent implements OnInit {
       this.mainService.addPost(this.newPost).subscribe((p) => {
         this.refreshPost();
         this.form.reset();
+        this.submitted = false;
       });
     }
   }

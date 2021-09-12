@@ -15,7 +15,7 @@
     <div class="collapse pt-1" id="newPostForm">
       <div class="card card-body" style="background-color: whitesmoke">
         <form [formGroup]="form" (ngSubmit)="addPost()">
-          <div class="form-group">
+          <fieldset class="form-group">
             <label for="postName">Naziv teme</label>
             <input
               type="text"
@@ -23,7 +23,18 @@
               id="postName"
               formControlName="postName"
             />
+            <span
+              class="text-danger"
+              *ngIf="
+                (form.controls.postName.touched || submitted) &&
+                form.controls.postName.errors?.required
+              "
+            >
+              Potrebno je unijeti naslov teme
+            </span>
+          </fieldset>
 
+          <fieldset class="form-group">
             <label for="postText">Tekst</label>
             <textarea
               class="form-control"
@@ -31,14 +42,17 @@
               rows="3"
               formControlName="postText"
             ></textarea>
-          </div>
-          <button
-            type="submit"
-            class="btn btn-primary mb-2"
-            [disabled]="!form.valid"
-          >
-            Post
-          </button>
+            <span
+              class="text-danger"
+              *ngIf="
+                (form.controls.postText.touched || submitted) &&
+                form.controls.postText.errors?.required
+              "
+            >
+              Potrebno je unijeti tekst teme
+            </span>
+          </fieldset>
+          <button type="submit" class="btn btn-primary mb-2">Post</button>
         </form>
       </div>
     </div>
