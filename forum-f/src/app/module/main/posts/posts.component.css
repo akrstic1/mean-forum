@@ -7,13 +7,13 @@
 }
 
 .post {
-  background-color: lightgray;
+  background-color: whitesmoke;
   border: 1px solid black;
 }
-
+/*
 .post:not(:last-child) {
   border-bottom: none;
-}
+} */
 
 .post a:link,
 a:visited {

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="background-color: lightgrey">
   <h2>{{ categoryName }}</h2>
 
   <div class="m-4">
@@ -12,8 +12,8 @@
     >
       Dodaj novu temu
     </button>
-    <div class="collapse" id="newPostForm">
-      <div class="card card-body">
+    <div class="collapse pt-1" id="newPostForm">
+      <div class="card card-body" style="background-color: whitesmoke">
         <form [formGroup]="form" (ngSubmit)="addPost()">
           <div class="form-group">
             <label for="postName">Naziv teme</label>
@@ -45,10 +45,10 @@
   </div>
 
   <!--LISTA KATEGORIJA-->
-  <div>
+  <div class="pb-2">
     <div
       *ngFor="let post of categoryPosts | matchUser: users; let i = index"
-      class="post"
+      class="post mb-2 mt-2"
     >
       <div class="post_content">
         <div class="theme">

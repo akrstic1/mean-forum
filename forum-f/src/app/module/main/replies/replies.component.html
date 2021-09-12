@@ -4,9 +4,13 @@
 >
   <!--LISTA KATEGORIJA  -->
   <div *ngIf="users">
-    <div class="main_post row align-items-center justify-content-between">
-      <div *ngIf="post" class="post">
-        <div class="reply_content">
+    <div class="main_post mt-3">
+      <div
+        *ngIf="post"
+        class="post row align-items-center justify-content-between"
+        style="background-color: lightblue"
+      >
+        <div class="reply_content col-2">
           <div class="reply_user">
             <a href="#">{{ post.user_id | matchUser: users }}</a>
           </div>
@@ -17,15 +21,15 @@
           </div>
         </div>
 
-        <div class="reply">
+        <div class="mt-2 col-10">
+          <h4>Naslov teme: {{ post.theme }}</h4>
           <p>{{ post.text }}</p>
         </div>
       </div>
     </div>
     <div
       *ngFor="let reply of replies; let i = index"
-      class="post row align-items-center justify-content-between m-2"
-      style="background-color: gray"
+      class="reply row align-items-center justify-content-between m-2"
     >
       <div class="reply_content col-4">
         <div class="reply_user">
@@ -44,7 +48,7 @@
 
       <div class="col-2">
         <button (click)="deleteReply(reply._id)" class="btn btn-danger">
-          Delete
+          Obriši
         </button>
       </div>
     </div>
@@ -52,7 +56,7 @@
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="newReply">Write a reply</label>
+      <label for="newReply">Napiši odgovor</label>
       <textarea
         class="form-control"
         id="newReply"
@@ -61,7 +65,7 @@
       ></textarea>
     </div>
     <button type="submit" class="btn btn-primary mb-2" [disabled]="!form.valid">
-      Post
+      Pošalji
     </button>
   </form>
 </div>

@@ -39,7 +39,7 @@ export class DataService {
     );
   }
 
-  deleteReply(postId: string, replyId: string) {
+  deleteReply(postId: string, replyId: string): Observable<string> {
     return this.http.put(
       environment.API_URL + '/api/posts/' + postId,
       {
